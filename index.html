@@ -806,6 +806,202 @@
 
   /* Ensure no horizontal scroll at any width */
   html, body { overflow-x: hidden; }
+
+  /* === SEGIO TAB ADDITIONS === */
+  :root {
+    --segio: #1a6f4e;
+    --segio-tint: #e8f3ec;
+  }
+  .tabs {
+    display: flex; gap: 2px;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 4px; border-radius: var(--radius);
+    margin-bottom: clamp(24px, 3vw, 32px);
+    box-shadow: var(--shadow);
+    max-width: 100%; overflow-x: auto;
+  }
+  .tab {
+    background: transparent; border: none; color: var(--ink-3);
+    padding: 10px 20px;
+    font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 500;
+    border-radius: 7px; cursor: pointer; transition: all 0.15s;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  }
+  .tab:hover:not(.active) { color: var(--ink); background: var(--surface-2); }
+  .tab.active { background: var(--brand); color: white; box-shadow: 0 2px 6px rgba(0,0,106,0.2); }
+  .tab.active.segio-tab { background: var(--segio); box-shadow: 0 2px 6px rgba(26,111,78,0.2); }
+  .tab-icon { width: 16px; height: 16px; flex-shrink: 0; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .prices-hero {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: clamp(20px, 3vw, 28px);
+    margin-bottom: 20px; box-shadow: var(--shadow);
+  }
+  .prices-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 32px); }
+  @media (max-width: 720px) { .prices-grid { grid-template-columns: 1fr; gap: 20px; } }
+  .price-block { min-width: 0; }
+  .price-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--ink-3); text-transform: uppercase;
+    margin-bottom: 6px; display: block;
+  }
+  .price-label.frp { color: var(--accent); }
+  .price-label.ssp { color: var(--segio); }
+  .price-block.frp-block { border-left: 3px solid var(--accent); padding-left: 14px; }
+  .price-input-wrap { display: flex; align-items: baseline; gap: 6px; }
+  .price-prefix {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(20px, 3vw, 26px);
+    color: var(--ink-mute); font-weight: 500; line-height: 1; flex-shrink: 0;
+  }
+  .price-input {
+    background: transparent; border: none;
+    font-family: 'Geist', sans-serif; font-weight: 700;
+    font-size: clamp(22px, 3.8vw, 32px);
+    letter-spacing: -0.03em; line-height: 1.15;
+    color: var(--ink); width: 100%; min-width: 0;
+    outline: none; padding: 0; font-feature-settings: "tnum";
+  }
+  .price-input:focus { color: var(--brand); }
+  .price-input:disabled { opacity: 0.9; cursor: default; }
+  .price-hint { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-mute); margin-top: 6px; line-height: 1.4; }
+  .price-hint.locked { color: var(--accent); font-weight: 500; }
+  .price-hint strong { color: var(--ink); }
+
+  .frp-callout {
+    background: var(--accent-soft); border: 1px solid rgba(196,154,74,0.3);
+    border-radius: var(--radius-sm); padding: 12px 14px;
+    margin-top: 12px; font-size: 12px; color: var(--ink-2); line-height: 1.5;
+  }
+  .frp-callout strong { color: #8b6a28; font-weight: 600; }
+  .frp-callout .frp-amount { font-family: 'Geist Mono', monospace; font-weight: 600; color: #8b6a28; font-feature-settings: "tnum"; }
+
+  .mode-banner {
+    background: var(--segio-tint); border: 1px solid rgba(26,111,78,0.2);
+    border-radius: var(--radius); padding: 14px 18px; margin-bottom: 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .mode-banner-icon {
+    width: 32px; height: 32px; border-radius: 7px;
+    background: var(--segio); color: white;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: 'Geist Mono', monospace; font-size: 13px; font-weight: 600;
+  }
+  .mode-banner-title { font-weight: 600; font-size: 14px; color: var(--segio); margin-bottom: 2px; }
+  .mode-banner-desc { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+
+  .results-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 860px) { .results-grid { grid-template-columns: 1fr; } }
+  .result-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: clamp(20px, 3vw, 24px);
+    box-shadow: var(--shadow); min-width: 0; position: relative; overflow: hidden;
+  }
+  .result-card.zcg { background: linear-gradient(180deg, var(--brand-tint) 0%, var(--surface) 45%); border-color: rgba(0,0,106,0.15); }
+  .result-card.segio-card { background: linear-gradient(180deg, var(--segio-tint) 0%, var(--surface) 45%); border-color: rgba(26,111,78,0.2); }
+  .result-card.ziv { background: linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 45%); border-color: rgba(196,154,74,0.3); }
+  .result-top { margin-bottom: 16px; }
+  .result-tag {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 8px;
+    border-radius: 100px; white-space: nowrap;
+    display: inline-block; margin-bottom: 8px;
+  }
+  .result-card.zcg .result-tag { background: rgba(0,0,106,0.1); color: var(--brand); }
+  .result-card.segio-card .result-tag { background: rgba(26,111,78,0.12); color: var(--segio); }
+  .result-card.ziv .result-tag { background: rgba(196,154,74,0.15); color: #8b6a28; }
+  .result-name { font-weight: 600; font-size: 15px; color: var(--ink); letter-spacing: -0.01em; }
+  .result-amount {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(28px, 4.5vw, 36px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+    color: var(--ink); font-feature-settings: "tnum";
+    word-break: break-word; margin-bottom: 6px;
+  }
+  .result-sub { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-3); line-height: 1.4; }
+
+  .waterfall-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: clamp(20px, 3vw, 28px);
+    box-shadow: var(--shadow); margin-bottom: 16px;
+  }
+  .wf-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 12px; margin-bottom: 16px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-soft); flex-wrap: wrap;
+  }
+  .wf-head-title { font-weight: 600; font-size: 16px; color: var(--ink); }
+  .wf-head-title em { font-style: normal; color: var(--ink-3); font-weight: 400; }
+  .wf-head-sub { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-3); }
+  .wf-section { margin-top: 20px; }
+  .wf-section:first-child { margin-top: 0; }
+  .wf-section-title {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .wf-section-title .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .wf-section.z .wf-section-title { color: var(--brand); }
+  .wf-section.z .wf-section-title .dot { background: var(--brand); }
+  .wf-section.s .wf-section-title { color: var(--segio); }
+  .wf-section.s .wf-section-title .dot { background: var(--segio); }
+  .wf-section.s .wf-op.equals { color: var(--segio); }
+  .wf-row.total {
+    background: var(--surface-2);
+    margin: 8px calc(-1 * clamp(20px, 3vw, 28px));
+    padding: 10px clamp(20px, 3vw, 28px);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .wf-row.total .wf-label { color: var(--ink); font-weight: 600; }
+  .wf-row.total .wf-amount { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .wf-section.z .wf-row.total { background: var(--brand-tint); border-color: rgba(0,0,106,0.15); }
+  .wf-section.z .wf-row.total .wf-label, .wf-section.z .wf-row.total .wf-amount { color: var(--brand); }
+  .wf-section.s .wf-row.total { background: var(--segio-tint); border-color: rgba(26,111,78,0.2); }
+  .wf-section.s .wf-row.total .wf-label, .wf-section.s .wf-row.total .wf-amount { color: var(--segio); }
+
+  .scenario-compare {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: clamp(20px, 3vw, 28px); box-shadow: var(--shadow);
+  }
+  .scenario-title { font-weight: 600; font-size: 16px; color: var(--ink); margin-bottom: 4px; }
+  .scenario-title em { font-style: normal; color: var(--ink-3); font-weight: 400; }
+  .scenario-sub { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--ink-3); margin-bottom: 16px; }
+  .scenario-rows { display: flex; flex-direction: column; gap: 10px; }
+  .scenario-row {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 14px; align-items: center; padding: 12px 14px;
+    background: var(--surface-2); border-radius: var(--radius-sm);
+    border: 1px solid var(--border-soft);
+  }
+  .scenario-row.winner { background: var(--green-soft); border-color: rgba(47,143,94,0.3); }
+  .scenario-row-label { font-size: 13px; color: var(--ink-2); min-width: 0; }
+  .scenario-row-label strong { color: var(--ink); font-weight: 600; }
+  .scenario-row-label small {
+    display: block; font-family: 'Geist Mono', monospace;
+    font-size: 10px; color: var(--ink-mute); margin-top: 2px;
+  }
+  .scenario-row-amount {
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px; font-weight: 600; color: var(--ink);
+    white-space: nowrap; font-feature-settings: "tnum";
+  }
+  .scenario-row.winner .scenario-row-amount { color: var(--green); }
+  .scenario-row-delta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px; color: var(--ink-3); white-space: nowrap;
+    padding: 3px 8px; background: var(--surface);
+    border-radius: 100px; border: 1px solid var(--border-soft);
+  }
+  .scenario-row.winner .scenario-row-delta {
+    background: rgba(47,143,94,0.15); color: var(--green); border-color: rgba(47,143,94,0.3);
+  }
 </style>
 </head>
 <body>
@@ -828,7 +1024,22 @@
     </div>
   </header>
 
-  <!-- ARV HERO -->
+  
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-page="offer" role="tab">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Wholesale Offer
+    </button>
+    <button class="tab segio-tab" data-page="segio" role="tab">
+      <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
+      ZCG · SEGIO Split
+    </button>
+  </nav>
+
+  <!-- PAGE 1: WHOLESALE OFFER -->
+  <div class="page active" id="page-offer">
+
+    <!-- ARV HERO -->
   <section class="arv-hero">
     <label class="arv-label" for="arv">After-Repair Value · ARV</label>
     <div class="arv-input-group">
@@ -1177,6 +1388,139 @@
     </section>
   </div>
 
+    </div>
+  <!-- /PAGE 1 -->
+
+  <!-- PAGE 2: ZCG-SEGIO SPLIT -->
+  <div class="page" id="page-segio">
+    <section class="prices-hero">
+      <div class="prices-grid">
+        <div class="price-block">
+          <label class="price-label" for="segAcq">ZCG Acquisition Cost</label>
+          <div class="price-input-wrap"><span class="price-prefix">$</span><input type="text" class="price-input" id="segAcq" value="380,000" inputmode="numeric" /></div>
+          <div class="price-hint">Contract price to seller</div>
+        </div>
+        <div class="price-block frp-block">
+          <label class="price-label frp" for="segFrp">Flipper Reference Price</label>
+          <div class="price-input-wrap"><span class="price-prefix">$</span><input type="text" class="price-input" id="segFrp" value="405,000" inputmode="numeric" /></div>
+          <div class="price-hint locked" id="frpHint"><strong>Auto</strong> · from Method 01 tier</div>
+        </div>
+        <div class="price-block">
+          <label class="price-label ssp" for="segSsp">Actual Sale Price</label>
+          <div class="price-input-wrap"><span class="price-prefix">$</span><input type="text" class="price-input" id="segSsp" value="460,000" inputmode="numeric" /></div>
+          <div class="price-hint">Price to SEGIO-sourced buyer</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main">
+      <aside class="column">
+        <div class="section-kicker">Split Parameters</div>
+
+        <div class="input-card open" data-card="frpSrc">
+          <div class="card-header">
+            <div class="card-header-left"><span class="card-num">01</span><span class="card-name">FRP Source</span></div>
+            <div class="card-header-right"><span class="card-value" id="frpSrc-val">Method 01</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          </div>
+          <div class="card-body">
+            <div class="toggle-group" style="grid-template-columns: repeat(3, 1fr);">
+              <button class="toggle-btn active" data-mode="frp" data-val="m1">Method 01</button>
+              <button class="toggle-btn" data-mode="frp" data-val="m2">Method 02</button>
+              <button class="toggle-btn" data-mode="frp" data-val="manual">Manual</button>
+            </div>
+            <div class="frp-callout" id="frpCallout"></div>
+          </div>
+        </div>
+
+        <div class="input-card open" data-card="payout">
+          <div class="card-header">
+            <div class="card-header-left"><span class="card-num">02</span><span class="card-name">Split Model</span></div>
+            <div class="card-header-right"><span class="card-value" id="payout-val">100% spread · pro-rata agents</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          </div>
+          <div class="card-body">
+            <div style="font-size:12px; color:var(--ink-2); line-height:1.6; padding:4px 2px;">
+              <div style="margin-bottom:10px;"><strong style="color:var(--ink)">SEGIO gets 100% of the spread</strong> (SSP − FRP). </div>
+              <div><strong style="color:var(--ink)">Agent fees (23%) are split pro-rata</strong> between the two portions:</div>
+              <div style="margin-top:6px; padding-left:12px; color:var(--ink-3); font-family:'Geist Mono',monospace; font-size:11px; line-height:1.7;">
+                → ZCG share: 23% × (FRP − Acq)<br>
+                → SEGIO share: 23% × (SSP − FRP)
+              </div>
+              <div style="margin-top:10px; font-size:11px; color:var(--ink-3);">Both parties contribute to ZCG's agent team proportional to the revenue they generate.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-card" data-card="segAgents">
+          <div class="card-header">
+            <div class="card-header-left"><span class="card-num">03</span><span class="card-name">ZCG Agent Fees</span></div>
+            <div class="card-header-right"><span class="card-value" id="segAgents-val">23%</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          </div>
+          <div class="card-body">
+            <div class="field"><div class="field-label">Acquisition agent</div><div class="input-wrap"><input type="text" class="input suffix-only" id="acqPct" value="16" inputmode="decimal" /><span class="input-suffix">%</span></div></div>
+            <div class="field"><div class="field-label">Disposition agent</div><div class="input-wrap"><input type="text" class="input suffix-only" id="dispoPct" value="5" inputmode="decimal" /><span class="input-suffix">%</span></div></div>
+            <div class="field"><div class="field-label">Transaction coordinator</div><div class="input-wrap"><input type="text" class="input suffix-only" id="tcPct" value="2" inputmode="decimal" /><span class="input-suffix">%</span></div></div>
+            <div style="font-size:11px; color:var(--ink-3); line-height:1.5; padding-top:10px;">Paid as % of ZCG gross profit (SSP − acquisition). SEGIO paid separately as referral.</div>
+          </div>
+        </div>
+
+        <div class="input-card" data-card="ziv">
+          <div class="card-header">
+            <div class="card-header-left"><span class="card-num">04</span><span class="card-name">Ziv Ownership</span></div>
+            <div class="card-header-right"><span class="card-value" id="ziv-val">ZCG 100% · SEG 50%</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+          </div>
+          <div class="card-body">
+            <div class="field"><div class="field-label">Ziv stake in ZCG</div><div class="input-wrap"><input type="text" class="input suffix-only" id="zivZcgPct" value="100" inputmode="decimal" /><span class="input-suffix">%</span></div></div>
+            <div class="field"><div class="field-label">Ziv stake in SEGIO</div><div class="input-wrap"><input type="text" class="input suffix-only" id="zivSegioPct" value="50" inputmode="decimal" /><span class="input-suffix">%</span></div></div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="column">
+        <div class="section-kicker">Profit Split Analysis</div>
+        <div class="mode-banner">
+          <div class="mode-banner-icon">i</div>
+          <div class="mode-banner-body">
+            <div class="mode-banner-title">ZCG captures all profit, pays SEGIO as referral</div>
+            <div class="mode-banner-desc">ZCG books the full sale and pays its agents from the gross. SEGIO receives a defined payout as the buyer-lead source.</div>
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <article class="result-card zcg">
+            <div class="result-top"><span class="result-tag">ZCG</span><div class="result-name">ZCG Net Profit</div></div>
+            <div class="result-amount" id="zcgNet">$0</div>
+            <div class="result-sub" id="zcgSub">After agents + SEGIO payout</div>
+          </article>
+          <article class="result-card segio-card">
+            <div class="result-top"><span class="result-tag">SEGIO</span><div class="result-name">SEGIO Payout</div></div>
+            <div class="result-amount" id="segioNet">$0</div>
+            <div class="result-sub" id="segioSub">Paid by ZCG</div>
+          </article>
+          <article class="result-card ziv">
+            <div class="result-top"><span class="result-tag">ZIV</span><div class="result-name">Ziv's Take</div></div>
+            <div class="result-amount" id="zivTotal">$0</div>
+            <div class="result-sub" id="zivSub">100% ZCG + 50% SEGIO</div>
+          </article>
+        </div>
+
+        <div class="waterfall-card">
+          <div class="wf-head">
+            <div class="wf-head-title">Line-by-line <em>build</em></div>
+            <div class="wf-head-sub" id="segWfSub">50% of spread</div>
+          </div>
+          <div id="segWaterfall"></div>
+        </div>
+
+        <div class="scenario-compare">
+          <div class="scenario-title">Deal comparison <em>· flip vs SEGIO route</em></div>
+          <div class="scenario-sub">Ziv's take under each scenario</div>
+          <div class="scenario-rows" id="scenarioRows"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- /PAGE 2 -->
+
   <footer class="footer">
     <div>ZCG Acquisition Desk · v1.1</div>
     <div id="footTime"></div>
@@ -1481,6 +1825,7 @@ document.querySelectorAll('.input, #arv').forEach(inp => {
 });
 
 document.getElementById('resetBtn').addEventListener('click', () => {
+  // Offer page
   document.getElementById('arv').value = fmtPlain(DEFAULTS.arv);
   document.getElementById('renovation').value = fmtPlain(DEFAULTS.renovation);
   document.getElementById('ltc').value = DEFAULTS.ltc;
@@ -1497,16 +1842,33 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   document.getElementById('profitRoi').value = DEFAULTS.profitRoi;
   document.getElementById('assignFee').value = fmtPlain(DEFAULTS.assignFee);
 
+  // SEGIO page
+  const segioDefaults = {
+    segAcq: 380000, segSsp: 460000,
+    acqPct: 16, dispoPct: 5, tcPct: 2,
+    zivZcgPct: 100, zivSegioPct: 50
+  };
+  const segPct = ['acqPct','dispoPct','tcPct','zivZcgPct','zivSegioPct'];
+  Object.keys(segioDefaults).forEach(k => {
+    const el = document.getElementById(k);
+    if (!el) return;
+    el.value = segPct.includes(k) ? segioDefaults[k].toString() : fmtPlain(segioDefaults[k]);
+  });
+
   closeMode = 'flat'; profitMode = 'flat';
+  frpSource = 'm1';
   document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
   document.querySelector('.toggle-btn[data-mode="close"][data-val="flat"]').classList.add('active');
   document.querySelector('.toggle-btn[data-mode="profit"][data-val="flat"]').classList.add('active');
+  const frpBtn = document.querySelector('.toggle-btn[data-mode="frp"][data-val="m1"]');
+  if (frpBtn) frpBtn.classList.add('active');
   document.getElementById('close-flat').style.display = 'block';
   document.getElementById('close-detailed').style.display = 'none';
   document.getElementById('profit-flat').style.display = 'block';
   document.getElementById('profit-arv').style.display = 'none';
   document.getElementById('profit-roi').style.display = 'none';
   render();
+  updateFrpBinding();
 });
 
 // Timestamp
@@ -1517,6 +1879,192 @@ function updateTime() {
 }
 updateTime();
 setInterval(updateTime, 30000);
+
+
+// ========== SEGIO SPLIT LOGIC ==========
+let frpSource = 'm1';
+
+function calcSegio(overrides = {}) {
+  const acq = overrides.acq ?? parseNum(document.getElementById('segAcq').value);
+  const frp = overrides.frp ?? parseNum(document.getElementById('segFrp').value);
+  const ssp = overrides.ssp ?? parseNum(document.getElementById('segSsp').value);
+  const acqPct = parseNum(document.getElementById('acqPct').value) / 100;
+  const dispoPct = parseNum(document.getElementById('dispoPct').value) / 100;
+  const tcPct = parseNum(document.getElementById('tcPct').value) / 100;
+  const totalAgentPct = acqPct + dispoPct + tcPct;
+  const zivZcgPct = parseNum(document.getElementById('zivZcgPct').value) / 100;
+  const zivSegioPct = parseNum(document.getElementById('zivSegioPct').value) / 100;
+
+  // Two portions of the gross profit
+  const zcgGross = Math.max(0, frp - acq);        // what ZCG would have made flipping
+  const spread = Math.max(0, ssp - frp);          // pure SEGIO upside
+
+  // Agent fees split pro-rata across the two portions
+  const zcgAgentCost = zcgGross * totalAgentPct;
+  const segioAgentCost = spread * totalAgentPct;
+
+  // Individual agent line-items on each side (for waterfall display)
+  const zcgAcqFee = zcgGross * acqPct;
+  const zcgDispoFee = zcgGross * dispoPct;
+  const zcgTcFee = zcgGross * tcPct;
+  const segAcqFee = spread * acqPct;
+  const segDispoFee = spread * dispoPct;
+  const segTcFee = spread * tcPct;
+
+  const zcgNet = zcgGross - zcgAgentCost;
+  const segioNet = spread - segioAgentCost;
+
+  const zivFromZcg = zcgNet * zivZcgPct;
+  const zivFromSegio = segioNet * zivSegioPct;
+  const zivTotal = zivFromZcg + zivFromSegio;
+
+  return {
+    acq, frp, ssp, spread, zcgGross,
+    zcgAgentCost, segioAgentCost,
+    zcgAcqFee, zcgDispoFee, zcgTcFee, segAcqFee, segDispoFee, segTcFee,
+    zcgNet, segioNet,
+    zivFromZcg, zivFromSegio, zivTotal, zivZcgPct, zivSegioPct,
+    totalAgentPct, acqPct: acqPct*100, dispoPct: dispoPct*100, tcPct: tcPct*100
+  };
+}
+
+function updateFrpBinding() {
+  const offerCalc = calcWithProfit();
+  const frpInput = document.getElementById('segFrp');
+  const callout = document.getElementById('frpCallout');
+  const hint = document.getElementById('frpHint');
+  const srcVal = document.getElementById('frpSrc-val');
+  if (!frpInput) return;
+
+  const m1Frp = (offerCalc.arv * offerCalc.tier.pct) + offerCalc.assignFee;
+  const m2Frp = offerCalc.flipperPays;
+
+  if (frpSource === 'm1') {
+    frpInput.value = fmtPlain(m1Frp);
+    frpInput.disabled = true;
+    hint.innerHTML = '<strong>Auto</strong> · from Method 01 (ARV × tier + assignment)';
+    hint.classList.add('locked');
+    srcVal.textContent = 'Method 01';
+    callout.innerHTML = '<strong>Method 01 · Tier formula:</strong> FRP pulled live from Method 1 on the Wholesale Offer tab (ARV × tier % + assignment fee).<div style="margin-top:8px;">Current: <span class="frp-amount">' + fmt(m1Frp) + '</span></div>';
+  } else if (frpSource === 'm2') {
+    frpInput.value = fmtPlain(m2Frp);
+    frpInput.disabled = true;
+    hint.innerHTML = '<strong>Auto</strong> · from Method 02 flipper build-up';
+    hint.classList.add('locked');
+    srcVal.textContent = 'Method 02';
+    callout.innerHTML = '<strong>Method 02 · Flipper build-up:</strong> FRP = what a flipper would actually pay based on the full cost stack from the Wholesale Offer tab.<div style="margin-top:8px;">Current: <span class="frp-amount">' + fmt(m2Frp) + '</span></div>';
+  } else {
+    frpInput.disabled = false;
+    hint.innerHTML = '<strong>Manual</strong> · override for this deal';
+    hint.classList.remove('locked');
+    srcVal.textContent = 'Manual';
+    callout.innerHTML = '<strong>Manual override:</strong> Use when formulas are clearly wrong for the specific deal — distressed sale, exceptional comp, or negotiated flipper quote. <em style="color:var(--ink-3);">Requires 2-signature sign-off.</em>';
+  }
+  renderSegio();
+}
+
+function renderSegio() {
+  const c = calcSegio();
+  const totalPct = parseNum(document.getElementById('acqPct').value) + parseNum(document.getElementById('dispoPct').value) + parseNum(document.getElementById('tcPct').value);
+  document.getElementById('segAgents-val').textContent = totalPct + '%';
+  document.getElementById('payout-val').textContent = '100% spread · pro-rata agents';
+  document.getElementById('ziv-val').textContent = 'ZCG ' + Math.round(c.zivZcgPct*100) + '% · SEG ' + Math.round(c.zivSegioPct*100) + '%';
+
+  document.getElementById('zcgNet').textContent = fmt(c.zcgNet);
+  document.getElementById('zcgSub').textContent = 'Wholesale ' + fmt(c.zcgGross) + ' − agents ' + fmt(c.zcgAgentCost);
+  document.getElementById('segioNet').textContent = fmt(c.segioNet);
+  document.getElementById('segioSub').textContent = 'Spread ' + fmt(c.spread) + ' − agents ' + fmt(c.segioAgentCost);
+  document.getElementById('zivTotal').textContent = fmt(c.zivTotal);
+  document.getElementById('zivSub').textContent = 'ZCG ' + fmt(c.zivFromZcg) + ' + SEGIO ' + fmt(c.zivFromSegio);
+
+  document.getElementById('segWfSub').textContent = 'Pro-rata agent split · 100% of spread to SEGIO';
+  document.getElementById('segWaterfall').innerHTML =
+    '<div class="wf-section zcg">' +
+      '<div class="wf-section-title"><span class="dot"></span>ZCG · Wholesale Portion</div>' +
+      '<div class="wf-row"><span class="wf-op plus">+</span><span class="wf-label">Flipper Reference Price (FRP)</span><span class="wf-amount">' + fmt(c.frp) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Acquisition cost<span class="wf-hint">contract with seller</span></span><span class="wf-amount">' + fmt(c.acq) + '</span></div>' +
+      '<div class="wf-row subtotal"><span class="wf-op equals">=</span><span class="wf-label">ZCG Wholesale Profit</span><span class="wf-amount">' + fmt(c.zcgGross) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Acquisition agent<span class="wf-hint">' + c.acqPct + '% of ZCG portion</span></span><span class="wf-amount">' + fmt(c.zcgAcqFee) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Disposition agent<span class="wf-hint">' + c.dispoPct + '% of ZCG portion</span></span><span class="wf-amount">' + fmt(c.zcgDispoFee) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Transaction coordinator<span class="wf-hint">' + c.tcPct + '% of ZCG portion</span></span><span class="wf-amount">' + fmt(c.zcgTcFee) + '</span></div>' +
+      '<div class="wf-row total"><span class="wf-op equals">=</span><span class="wf-label">ZCG Net</span><span class="wf-amount">' + fmt(c.zcgNet) + '</span></div>' +
+    '</div>' +
+    '<div class="wf-section segio">' +
+      '<div class="wf-section-title"><span class="dot"></span>SEGIO · Spread Portion</div>' +
+      '<div class="wf-row"><span class="wf-op plus">+</span><span class="wf-label">Actual Sale Price (SSP)</span><span class="wf-amount">' + fmt(c.ssp) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">FRP<span class="wf-hint">flipper baseline</span></span><span class="wf-amount">' + fmt(c.frp) + '</span></div>' +
+      '<div class="wf-row subtotal"><span class="wf-op equals">=</span><span class="wf-label">Spread (100% to SEGIO)</span><span class="wf-amount">' + fmt(c.spread) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Acquisition agent<span class="wf-hint">' + c.acqPct + '% of SEGIO portion</span></span><span class="wf-amount">' + fmt(c.segAcqFee) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Disposition agent<span class="wf-hint">' + c.dispoPct + '% of SEGIO portion</span></span><span class="wf-amount">' + fmt(c.segDispoFee) + '</span></div>' +
+      '<div class="wf-row"><span class="wf-op minus">−</span><span class="wf-label">Transaction coordinator<span class="wf-hint">' + c.tcPct + '% of SEGIO portion</span></span><span class="wf-amount">' + fmt(c.segTcFee) + '</span></div>' +
+      '<div class="wf-row total"><span class="wf-op equals">=</span><span class="wf-label">SEGIO Net</span><span class="wf-amount">' + fmt(c.segioNet) + '</span></div>' +
+    '</div>';
+
+  const flipOnly = calcSegio({ ssp: c.frp });
+  const flipZiv = flipOnly.zcgNet * c.zivZcgPct;
+  const segioZiv = c.zivTotal;
+  const uplift = segioZiv - flipZiv;
+  const upliftPct = flipZiv > 0 ? ((uplift / flipZiv) * 100) : 0;
+  document.getElementById('scenarioRows').innerHTML =
+    '<div class="scenario-row">' +
+      '<div class="scenario-row-label"><strong>If ZCG flipped only</strong><small>Sell to flipper at ' + fmt(c.frp) + ' · no SEGIO route</small></div>' +
+      '<div class="scenario-row-amount">' + fmt(flipZiv) + '</div>' +
+      '<div class="scenario-row-delta">Ziv\'s take</div>' +
+    '</div>' +
+    '<div class="scenario-row ' + (uplift > 0 ? 'winner' : '') + '">' +
+      '<div class="scenario-row-label"><strong>With SEGIO route</strong><small>Sell at ' + fmt(c.ssp) + ' · SEGIO gets 100% of spread</small></div>' +
+      '<div class="scenario-row-amount">' + fmt(segioZiv) + '</div>' +
+      '<div class="scenario-row-delta">' + (uplift > 0 ? '+' : '') + fmt(uplift) + (upliftPct !== 0 ? ' · ' + (uplift > 0 ? '+' : '') + upliftPct.toFixed(0) + '%' : '') + '</div>' +
+    '</div>';
+}
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const page = t.dataset.page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    if (page === 'segio') updateFrpBinding();
+  });
+});
+
+// Attach comma format to SEGIO inputs
+const SEGIO_PCT = ['acqPct','dispoPct','tcPct','zivZcgPct','zivSegioPct'];
+['segAcq','segFrp','segSsp','acqPct','dispoPct','tcPct','zivZcgPct','zivSegioPct'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('blur', () => {
+    const v = parseNum(el.value);
+    if (SEGIO_PCT.includes(id)) el.value = v.toString();
+    else el.value = fmtPlain(v);
+  });
+  el.addEventListener('focus', () => { el.value = String(parseNum(el.value)); });
+  el.addEventListener('input', renderSegio);
+});
+
+// Tie offer page inputs to SEGIO FRP binding
+['arv','renovation','ltc','hmRate','months','taxRate','hoa','closeFlat','origPts','titleCost','sellPct','profitFlat','profitArv','profitRoi','assignFee'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => { if (frpSource !== 'manual') updateFrpBinding(); });
+});
+
+// Toggle handlers for FRP source
+document.querySelectorAll('.toggle-btn[data-mode="frp"]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const val = btn.dataset.val;
+    document.querySelectorAll('.toggle-btn[data-mode="frp"]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    frpSource = val;
+    updateFrpBinding();
+  });
+});
+
+// Initial SEGIO render
+setTimeout(() => { updateFrpBinding(); }, 50);
+
 
 // Initial render
 render();
